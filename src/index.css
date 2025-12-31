@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Lato';
+  src: url('/fonts/lato.ttf') format('truetype');
+}
+
+
+
+:root {
+  --primary: #ee6c4d;
+  --primary-foreground: #fff;
+  --secondary: #353535;
+  --secondary-foreground: #fff;
+
+  --text-muted: #6b7280;
+  --text-primary: #2e2d2d;
+
+  --card: #eee;
+  --background: #f9f9f9;
+
+  --border: #e5e7eb;
+
+  /* semantic colors */
+  --destructive: #bc4749;
+  --success: #006045;
+  --warning: #fca311;
+}
+
+@theme inline {
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-text-muted: var(--text-muted);
+  --color-text-primary: var(--text-primary);
+
+  --color-card: var(--card);
+  --color-background: var(--background);
+
+  --color-border: var(--border);
+
+  --color-destructive: var(--destructive);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+}
+
+body, * {
+  font-family: 'Lato', sans-serif;
+}
