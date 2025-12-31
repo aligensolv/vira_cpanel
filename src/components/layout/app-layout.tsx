@@ -20,7 +20,6 @@ const navs: NavGroup[] = [
     title: "Administration",
     items: [
       { label: "Users", icon: <Users size={18}/>, path: "/users" },
-      { label: "Managers", icon: <Users size={18}/>, path: "/managers" },
     ]
   },
 ];
