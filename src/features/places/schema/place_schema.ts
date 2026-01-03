@@ -13,8 +13,8 @@ export const placeSchema = z.object({
     
   min_duration_minutes: z.coerce
     .number()
-    .min(15, "Minimum duration is 15 minutes")
-    .default(30),
+    .min(1, "Minimum duration is 1 minutes")
+    .default(1),
     
   is_active: z.boolean().default(true),
 });

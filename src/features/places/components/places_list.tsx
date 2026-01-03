@@ -11,15 +11,17 @@ import { useNotification } from '../../../core/hooks/use-notification';
 interface PlacesListProps {
   data: Place[];
   isLoading: boolean;
+  refetch: () => void
 }
 
-export const PlacesList: React.FC<PlacesListProps> = ({ data, isLoading }) => {
+export const PlacesList: React.FC<PlacesListProps> = ({ data, isLoading, refetch }) => {
   const navigate = useNavigate();
   const [deletingId, setDeletingId] = useState<number | null>(null);
   const { notify } = useNotification()
 
   const deleteMutation = useDeletePlace(deletingId, () => {
     setDeletingId(null)
+    refetch()
     notify.success('Place was successfully deleted.')
   });
 

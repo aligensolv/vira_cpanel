@@ -18,7 +18,7 @@ export const PlacesPage: React.FC = () => {
   })
   
 
-  const { data, isLoading } = usePlaces(filters)
+  const { data, isLoading,refetch } = usePlaces(filters)
   const { data: regions = [] } = useRegions()
 
   return (
@@ -51,6 +51,7 @@ export const PlacesPage: React.FC = () => {
         <PlacesList 
           data={data?.data || []} 
           isLoading={isLoading} 
+          refetch={refetch}
         />
       </div>
     </div>

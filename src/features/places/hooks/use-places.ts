@@ -1,3 +1,4 @@
+import { useId } from "react";
 import { useGetQuery, useMutationAction } from "../../../core/hooks/queries-actions";
 import type { PlaceFormValues } from "../schema/place_schema";
 import type { PlaceResponse, SinglePlaceResponse, Place, PlaceFilters } from "../types";
@@ -10,10 +11,12 @@ export const usePlaces = (filters?: PlaceFilters) => {
   });
 };
 
-// --- GET SINGLE PLACE ---
+
 export const usePlace = (id: string | undefined) => {
+  const signature = useId()
+
   return useGetQuery<SinglePlaceResponse>({
-    key: ['places', id],
+    key: ['places', id, signature],
     url: `/places/${id}`,
     options: {
       enabled: !!id,
