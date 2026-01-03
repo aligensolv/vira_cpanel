@@ -78,10 +78,14 @@ export function useGetQuery<TData = unknown>({
   return useQuery<TData>(queryOptions);
 }
 
-interface ApiError {
+export interface ApiError {
   response: {
     data: {
-      message: string;
+      error: {
+        code: string
+        message: string
+        errors: Record<string, Array<string>>
+      }
     };
     statusCode: number;
     message: string;

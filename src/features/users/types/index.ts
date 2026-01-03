@@ -2,7 +2,6 @@ export interface User {
   id: number
   name: string
   email: string
-  phone?: string
   total_bookings: number
   has_active_booking: boolean
   created_at: string

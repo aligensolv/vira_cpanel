@@ -77,7 +77,7 @@ function DataTable<T extends { id: string | number }>({
   };
 
   return (
-    <div className="w-full bg-white border border-neutral-200 rounded-none flex flex-col h-full min-h-100">
+    <div className="w-full bg-white border border-neutral-200 rounded-none flex flex-col max-h-134">
       
       {/* Header */}
       <div className="px-6 py-5 border-b border-neutral-200 flex justify-between items-end shrink-0">

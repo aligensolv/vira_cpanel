@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useEffectEvent } from 'react';
 import { motion } from 'framer-motion';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useLayoutStore } from '../../hooks/use-layout';
@@ -8,6 +8,7 @@ import type { NavGroup } from '../../types/navigation';
 import { User, Settings, LogOut, ChevronsUpDown } from 'lucide-react';
 import { Dropdown } from '../ui/dropdown';
 import { useLogout } from '../../features/auth/hooks/use-auth';
+import type { Manager } from '../../features/managers/types';
 
 interface SidebarProps {
   groups: NavGroup[];
@@ -21,9 +22,13 @@ export const Sidebar: React.FC<SidebarProps> = ({ groups }) => {
   const [allowOverflow, setAllowOverflow] = useState(false);
   const logout = useLogout()
 
+  const manager: Manager = JSON.parse(localStorage.getItem('manager') || '{}');
+
+  const setAllowOverflowEvent = useEffectEvent(setAllowOverflow);
+
   useEffect(() => {
     if (!isSidebarOpen) {
-      setAllowOverflow(false);
+      setAllowOverflowEvent(false);
     }
   }, [isSidebarOpen]);
 
@@ -82,12 +87,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ groups }) => {
                     className={({ isActive }) => `
                       w-full flex items-center gap-3 px-3 py-2 transition-all duration-200 group relative
                       ${isActive 
-                        ? 'bg-primary/10 text-primary' 
+                        ? 'bg-primary/20 text-primary' 
                         : 'text-neutral-500 hover:text-neutral-600 hover:bg-black/5'
                       }
                     `}
                   >
-                    <div className={`relative z-10 transition-transform group-hover:scale-105 ${isActive ? 'text-primary' : ''}`}>
+                    <div className={`relative z-10 transition-transform ${isActive ? 'text-primary' : ''}`}>
                       {item.icon}
                     </div>
                     <span className={
@@ -122,14 +127,14 @@ export const Sidebar: React.FC<SidebarProps> = ({ groups }) => {
             // horizontal="left"
             width="w-60"
             trigger={
-              <div className="w-64 flex items-center justify-between gap-3 p-2 hover:bg-secondary/10 transition-all select-none group cursor-pointer">
+              <div className="w-64 flex items-center justify-between gap-3 p-2 bg-secondary/5 hover:bg-secondary/10 transition-all select-none group cursor-pointer">
                 <div className="flex items-center gap-3 flex-1 overflow-hidden">
                   <div className="w-9 h-9 bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold shrink-0">
-                    VA
+                    <span>{manager?.name?.split(' ').map((n) => n[0]).join('')}</span>
                   </div>
                   <div className="flex flex-col items-start truncate">
-                    <span className="text-sm font-bold text-neutral-900 truncate w-full text-left">Vira Admin</span>
-                    <span className="text-xs text-neutral-500 truncate w-full text-left">admin@vira.no</span>
+                    <span className="text-sm font-bold text-neutral-900 truncate w-full text-left">{manager?.name}</span>
+                    <span className="text-xs text-neutral-500 truncate w-full text-left">{manager?.email}</span>
                   </div>
                 </div>
                 <ChevronsUpDown size={14} className="text-neutral-400 group-hover:text-neutral-900 transition-colors shrink-0"/>
@@ -139,7 +144,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ groups }) => {
             <div className="p-1">
               <div className="px-2 py-3 border-b border-neutral-100 mb-1">
                  <p className="text-xs font-bold text-neutral-400 uppercase tracking-wider">Signed in as</p>
-                 <p className="text-sm font-medium text-neutral-900 truncate">admin@vira.no</p>
+                 <p className="text-sm font-medium text-neutral-900 truncate">{manager?.email}</p>
               </div>
 
               <button className="cursor-pointer w-full text-left px-2 py-2 text-sm text-secondary hover:bg-secondary/10 hover:text-neutral-900 flex items-center gap-2">

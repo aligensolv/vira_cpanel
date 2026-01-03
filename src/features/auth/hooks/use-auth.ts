@@ -4,15 +4,11 @@ import type { LoginFormValues } from '../schema/login_schema';
 import { useNotification } from '../../../core/hooks/use-notification';
 import { clearAuthSession, saveAuthToken } from '../../../core/lib/auth';
 import type { ManagerProfile } from '../types/manager';
+import type { Manager } from '../../managers/types';
 
 interface LoginResponse {
     access_token: string;
-    manager: {
-        id: string;
-        name: string;
-        email: string;
-        role: 'admin';
-    };
+    user: Manager
 }
 
 
@@ -25,13 +21,13 @@ export const useAdminLogin = () => {
     url: '/auth/login',
     onSuccessCallback: async (data) => {
       saveAuthToken(data.access_token);
-      localStorage.setItem('manager', JSON.stringify(data.manager));
+      localStorage.setItem('manager', JSON.stringify(data.user));
       
       navigate('/');
     },
     onErrorCallback: (error) => {
       console.error("Login Failed:", error)
-      notify.error(error.response.data.message)
+      notify.error(error.response.data.error.message)
     }
   });
 };

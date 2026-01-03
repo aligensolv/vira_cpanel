@@ -9,6 +9,11 @@ import { EditPlacePage } from "./features/places/pages/edit_place_page";
 import { PlacesPage } from "./features/places/pages/places_page";
 import { SingleRegionPage } from "./features/regions/pages/single_region_page";
 import { UsersPage } from "./features/users/pages/users_page";
+import { BookingsPage } from "./features/booking/pages/bookings_page";
+import { CreateManagerPage } from "./features/managers/pages/create-manager-page";
+import { EditManagerPage } from "./features/managers/pages/edit-manager-page";
+import { ManagersPage } from "./features/managers/pages/managers-page";
+import { BookingDetailsPage } from "./features/booking/pages/booking_details_page";
 
 
 const router = createBrowserRouter([
@@ -50,6 +55,28 @@ const router = createBrowserRouter([
           {
             path: 'users',
             element: <UsersPage />,
+          },
+
+          {
+            path: 'bookings',
+            element: <BookingsPage />,
+          },
+          {
+            path: 'bookings/:id',
+            element: <BookingDetailsPage />,
+          },
+
+          {
+            path: 'managers',
+            element: <ManagersPage />,
+          },
+          {
+            path: 'managers/create',
+            element: <CreateManagerPage />,
+          },
+          {
+            path: 'managers/edit/:id',
+            element: <EditManagerPage />,
           },
         ]
       },

@@ -5,7 +5,6 @@ import { usePlaces } from '../hooks/use-places'
 import { Button } from '../../../components/ui/button'
 import { PlacesList } from '../components/places_list'
 import { PlaceStats } from '../components/place_stats'
-import Card from '../../../components/ui/card'
 import { PlaceFiltersBar } from '../components/place_filters'
 import type { PlaceFilters } from '../types'
 import { useRegions } from '../../regions/hooks/use-region'
@@ -24,7 +23,7 @@ export const PlacesPage: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <Card className="flex flex-col md:flex-row md:items-center justify-between gap-4 py-2 border-none">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 py-2 border-none">
         <div>
           <h1 className="text-xl font-bold text-text-primary tracking-tight uppercase">Places</h1>
           <p className="text-sm text-text-muted">Overview of all bookable locations.</p>
@@ -35,7 +34,7 @@ export const PlacesPage: React.FC = () => {
         >
           Create Place
         </Button>
-      </Card>
+      </div>
 
       <PlaceStats 
         places={data?.data || []} 

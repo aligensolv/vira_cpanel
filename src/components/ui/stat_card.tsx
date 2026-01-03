@@ -34,21 +34,21 @@ export function StatCard({
   const getTrendStyles = (isPositive?: boolean) => {
     if (isPositive === true) {
       return {
-        bg: 'bg-emerald-50',
-        text: 'text-emerald-700',
+        bg: 'bg-success/10',
+        text: 'text-success',
         icon: <ArrowUpRight size={14} strokeWidth={2.5} />
       };
     }
     if (isPositive === false) {
       return {
-        bg: 'bg-rose-50',
-        text: 'text-rose-700',
+        bg: 'bg-destructive/10',
+        text: 'text-destructive',
         icon: <ArrowDownRight size={14} strokeWidth={2.5} />
       };
     }
     return {
-      bg: 'bg-neutral-100',
-      text: 'text-neutral-600',
+      bg: 'bg-secondary/10',
+      text: 'text-secondary',
       icon: <Minus size={14} strokeWidth={2.5} />
     };
   };
@@ -56,7 +56,7 @@ export function StatCard({
   const trendStyles = trend ? getTrendStyles(trend.isPositive) : null;
 
   return (
-    <Card className={`rounded-none shadow-none bg-white border-neutral-200 flex flex-col justify-between gap-4  ${className || ''}`}>
+    <Card className={`rounded-none shadow-none bg-white border-border flex flex-col justify-between gap-4  ${className || ''}`}>
       
       {/* Header: Icon & Title */}
       <div className="flex items-start justify-between">
@@ -69,7 +69,7 @@ export function StatCard({
           </h4>
         </div>
         
-        <div className="p-2 bg-primary border border-neutral-100 text-white flex items-center justify-center">
+        <div className="p-2 bg-primary border border-neutral-100 text-primary-foreground flex items-center justify-center">
           {icon}
         </div>
       </div>

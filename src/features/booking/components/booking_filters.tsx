@@ -1,8 +1,7 @@
 import React from 'react';
-import { Filter, X } from 'lucide-react';
+import { Filter } from 'lucide-react';
 import { Select } from '../../../components/ui/select';
 import { Input } from '../../../components/ui/input';
-import { Button } from '../../../components/ui/button';
 import { type BookingFilters } from '../types';
 import { usePlaces } from '../../places/hooks/use-places';
 import { useRegions } from '../../regions/hooks/use-region';
@@ -13,7 +12,7 @@ interface BookingFiltersProps {
   onReset: () => void;
 }
 
-export const BookingFiltersBar: React.FC<BookingFiltersProps> = ({ filters, onChange, onReset }) => {
+export const BookingFiltersBar: React.FC<BookingFiltersProps> = ({ filters, onChange }) => {
   const { data: places } = usePlaces();
   const { data: regions } = useRegions();
 
@@ -44,7 +43,7 @@ export const BookingFiltersBar: React.FC<BookingFiltersProps> = ({ filters, onCh
         {/* Region */}
         <Select
           label="Region"
-          options={Array.from(regions?.data ?? []).map(r => ({ label: r.name, value: String(r.id) })) || []}
+          options={Array.from(regions ?? []).map(r => ({ label: r.name, value: String(r.id) })) || []}
           value={filters.region_id}
           onChange={(val) => handleChange('region_id', val)}
         />

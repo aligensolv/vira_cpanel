@@ -3,7 +3,7 @@
 import { Outlet } from 'react-router-dom';
 import { Sidebar } from './sidebar';
 import { Header } from './header';
-import { LayoutDashboard, Users, Settings, MapPin } from 'lucide-react';
+import { LayoutDashboard, Users, Settings, MapPin, FileText, UserStar } from 'lucide-react';
 import type { NavGroup } from '../../types/navigation';
 import { ProtectedLayout } from './protected-layout';
 
@@ -14,12 +14,14 @@ const navs: NavGroup[] = [
       { label: "Dashboard", icon: <LayoutDashboard size={18}/>, path: "/" },
       { label: "Regions", icon: <MapPin size={18}/>, path: "/regions", count: 12 },
       { label: "Places", icon: <Settings size={18}/>, path: "/places" },
+      { label: "Bookings", icon: <FileText size={18}/>, path: "/bookings" },
     ]
   },
   {
     title: "Administration",
     items: [
       { label: "Users", icon: <Users size={18}/>, path: "/users" },
+      { label: "Managers", icon: <UserStar size={18}/>, path: "/managers" },
     ]
   },
 ];

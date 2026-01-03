@@ -3,10 +3,10 @@ import type { PlaceFormValues } from "../schema/place_schema";
 import type { PlaceResponse, SinglePlaceResponse, Place, PlaceFilters } from "../types";
 
 // --- GET ALL PLACES ---
-export const usePlaces = (filters: PlaceFilters) => {
+export const usePlaces = (filters?: PlaceFilters) => {
   return useGetQuery<PlaceResponse>({
     key: ['places', filters],
-    url: `/places?q=${filters.search || ''}&status=${filters.status}&region_id=${filters.region_id || ''}`,
+    url: `/places?q=${filters?.search || ''}&status=${filters?.status}&region_id=${filters?.region_id || ''}`,
   });
 };
 

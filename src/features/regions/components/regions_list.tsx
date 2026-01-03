@@ -1,23 +1,24 @@
-import React, { useState } from 'react';
-import { Edit, Trash2, MapPin } from 'lucide-react';
-import { DangerDialog } from '../../../components/ui/dialog';
-import { Dialog } from '../../../components/ui/dialog';
-import DataTable, { type ColumnDef } from '../../../components/ui/datatable';
-import { TableActions, TableAction } from '../../../components/ui/table-actions';
-import { useDeleteRegion, useUpdateRegion } from '../hooks/use-region';
-import type { Region } from '../types/region';
-import { RegionForm } from './region_form';
-import { useNotification } from '../../../core/hooks/use-notification';
+import React, { useState } from 'react'
+import { Edit, Trash2, MapPin } from 'lucide-react'
+import { DangerDialog } from '../../../components/ui/dialog'
+import { Dialog } from '../../../components/ui/dialog'
+import DataTable, { type ColumnDef } from '../../../components/ui/datatable'
+import { TableActions, TableAction } from '../../../components/ui/table-actions'
+import { useDeleteRegion, useUpdateRegion } from '../hooks/use-region'
+import type { Region } from '../types/region'
+import { RegionForm } from './region_form'
+import { useNotification } from '../../../core/hooks/use-notification'
 
 interface RegionsListProps {
-  data: Region[];
-  isLoading: boolean;
+  data: Region[]
+  isLoading: boolean
+  refetch: () => void
 }
 
-export const RegionsList: React.FC<RegionsListProps> = ({ data, isLoading }) => {
+export const RegionsList: React.FC<RegionsListProps> = ({ data, isLoading, refetch }) => {
   // --- STATE ---
-  const [editingRegion, setEditingRegion] = useState<Region | null>(null);
-  const [deletingId, setDeletingId] = useState<number | null>(null);
+  const [editingRegion, setEditingRegion] = useState<Region | null>(null)
+  const [deletingId, setDeletingId] = useState<number | null>(null)
 
   const { notify } = useNotification()
 
@@ -25,7 +26,8 @@ export const RegionsList: React.FC<RegionsListProps> = ({ data, isLoading }) => 
   const deleteMutation = useDeleteRegion(deletingId, () => {
     setDeletingId(null)
     notify.success('Region was successfully deleted.')
-  });
+    refetch()
+  })
   
   const columns: ColumnDef<Region>[] = [
     { 
@@ -81,11 +83,11 @@ export const RegionsList: React.FC<RegionsListProps> = ({ data, isLoading }) => 
         </TableActions>
       )
     }
-  ];
+  ]
 
   const handleDelete = () => {
-    if (deletingId) deleteMutation.mutate({ id: deletingId });
-  };
+    if (deletingId) deleteMutation.mutate({ id: deletingId })
+  }
 
 
   return (
@@ -117,19 +119,19 @@ export const RegionsList: React.FC<RegionsListProps> = ({ data, isLoading }) => 
         <UpdateRegionDialog 
           region={editingRegion} 
           onClose={() => {
-            setEditingRegion(null);
+            setEditingRegion(null)
             notify.success('Region was successfully updated.')
           }} 
         />
       )}
     </>
-  );
-};
+  )
+}
 
 // --- HELPER COMPONENT FOR UPDATE LOGIC ---
 // This ensures the hook is initialized with the correct ID
 const UpdateRegionDialog = ({ region, onClose }: { region: Region; onClose: () => void }) => {
-  const { mutate, isPending } = useUpdateRegion(region.id, onClose);
+  const { mutate, isPending } = useUpdateRegion(region.id, onClose)
 
   return (
     <Dialog 
@@ -144,5 +146,5 @@ const UpdateRegionDialog = ({ region, onClose }: { region: Region; onClose: () =
         onCancel={onClose}
       />
     </Dialog>
-  );
-};
+  )
+}

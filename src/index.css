@@ -10,8 +10,10 @@
 :root {
   --primary: #ee6c4d;
   --primary-foreground: #fff;
-  --secondary: #353535;
+  --secondary: #3f3f3f;
   --secondary-foreground: #fff;
+  --accent: #f2e8cf;
+  --accent-foreground: #000;
 
   --text-muted: #6b7280;
   --text-primary: #2e2d2d;
@@ -32,6 +34,8 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
 
   --color-text-muted: var(--text-muted);
   --color-text-primary: var(--text-primary);

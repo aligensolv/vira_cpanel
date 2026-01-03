@@ -12,7 +12,7 @@ export const RegionsPage: React.FC = () => {
   const [isCreateOpen, setIsCreateOpen] = useState(false)
   
   // Queries
-  const { data = [], isLoading } = useRegions()
+  const { data = [], isLoading, refetch } = useRegions()
   const { notify } = useNotification()
 
   console.log(data)
@@ -51,6 +51,7 @@ export const RegionsPage: React.FC = () => {
       {/* CONTENT */}
       <div className="pb-10">
         <RegionsList 
+          refetch={refetch}
           data={data || []} 
           isLoading={isLoading} 
         />
